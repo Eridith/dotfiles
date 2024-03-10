@@ -1,0 +1,232 @@
+{
+    "layer": "top",
+    "position": "top",
+    "height": 32,
+    "margin": "8 20 0 20",
+
+    "modules-left": [
+        "custom/hyprland", 
+        "custom/wallpaper", 
+        "custom/mail", 
+        "custom/kde", 
+        "custom/vm", 
+        "tray", 
+        "custom/spotify"
+    ],
+    "modules-center": [
+        "hyprland/workspaces"
+    ],
+    "modules-right": [
+        "group/hardware", 
+        "wireplumber", 
+        "network", 
+        "clock", 
+        "custom/exit"
+    ],
+
+
+
+    "hyprland/workspaces": {
+        "disable-scroll": true,
+        "all-outputs": false,
+        "format": "{icon}",
+        "format-icons": {
+            "active": "",
+            "default": ""
+        },
+        "sort-by-number": true
+    },
+
+    "hyprland/language": {
+        "format": "{} ",
+	"min-length": 5,
+	"tooltip": false
+    },
+
+    "keyboard-state": {
+        "numlock": false,
+        "capslock": true,
+        "format": "{name} {icon}",
+        "format-icons": {
+            "locked": " ",
+            "unlocked": ""
+        }
+    },
+
+    "custom/hyprland": {
+        "format": "",
+        "on-click": "kitty -e /home/Josh/.config/waybar/scripts/hyprupdate.sh",
+        "tooltip": true,
+        "tooltip-format": "Hyprland Updater"
+    },
+
+    "custom/pacman": {
+        "format": "{} ",
+        "interval": 3600,
+        "on-click": "kitty sh -c 'yay; echo Done - Press enter to exit; read'; pkill -SIGRTMIN+8 waybar",
+        "signal": 8,
+        "tooltip": false
+    },
+
+    "custom/wallpaper": {
+        "format": "󰋫",
+        "on-click": "/home/Josh/.config/waybar/scripts/wallshuffle.sh",
+        "tooltip": true,
+        "tooltip-format": "Shuffle Wallpaper",
+        "return-type": "json"
+    },
+
+    "custom/mail": {
+        "format": "",
+        "on-click": "thunderbird",
+        "signal": 9,
+        "tooltip": false
+    },
+
+    "custom/kde": {
+        "format": "󰄜",
+        "on-click": "kdeconnect-app"
+    },
+
+    "custom/spotify": {
+        "format": " {}",
+        "max-length": 40,
+        "interval": 30,
+        "exec": "$HOME/.config/waybar/scripts/mediaplayer.sh    2>/dev/null",
+        "exec-if": "pgrep spotify",
+        "return-type": "json"
+    },
+
+    "hyprland/mode": {
+        "format": "<span style=\"italic\">{}</span>"
+    },
+
+    "clock": {
+        "format": "{:%d %b, %H:%M}",
+        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
+    },
+
+    "custom/weather": {
+        "format": "{} {icon}",
+        "format-icons": [ ],
+        "tooltip": true,
+        "interval": 1800,
+        "exec": "$HOME/.config/waybar/scripts/wttr.py",
+        "return-type": "json"
+    },
+
+    "wireplumber": {
+        "format": "{volume}% {icon}",
+        "format-bluetooth": "{volume}% {icon} {format_source}",
+        "format-bluetooth-muted": " {icon} {format_source}",
+        "format-muted": "{icon} {format_source}",
+        "format-source": "{volume}% ",
+        "format-source-muted": "",
+        "on-click": "qpwgraph",
+        "format-icons": {
+            "headphone": "",
+            "hands-free": "",
+            "headset": "",
+            "mute": "󰝟",
+            "phone": "",
+            "portable": "",
+            "car": "",
+            "default": ["奄", "奔", "墳"]
+        }
+    },
+
+    "group/hardware": {
+        "orientation": "inherit",
+        "drawer": {
+            "transition-duration": 500,
+            "children-class": "not-hardware",
+            "transition-left-to-right": false
+        },
+        "modules": [
+            "custom/dash",
+            "cpu",
+            "custom/mem",
+            "custom/gpu",
+            "disk"
+        ]
+},
+
+"custom/dash": {
+        "format": "",
+        "tooltip": false,
+        "on-click": "kitty -e btop"
+    },
+
+    "cpu": {
+        "format": "{usage}% ",
+        "interval": 3,
+        "tooltip": true,
+        "tooltip-format": "CPU Utilization",
+        "on-click": "kitty -e btop"
+    },
+
+    "custom/mem": {
+        "format": "{} ",
+        "interval": 3,
+        "exec": "free -h | awk '/Mem:/{printf $3}'",
+        "tooltip": true,
+        "tooltip-format": "Memory Utilization",
+        "on-click": "kitty -e btop"
+    },
+
+    "custom/gpu": {
+        "format": "{}% 󰢮",
+        "interval": 3,
+        "exec": "nvidia-smi -a | grep Gpu | awk '{print $3}'",
+        "tooltip": true,
+        "tooltip-format": "GPU Utilization",
+        "on-click": "kitty -e btop"
+    },
+
+    "disk": {
+        "format": "{percentage_used}% ",
+        "interval": 30,
+        "tooltip": true,
+        "tooltip-format": "Disk Usage",
+        "on-click": "kitty -e btop"
+    },
+
+    "custom/vm": {
+        "format": "",
+        "tooltip": true,
+        "tooltip-format": "Windows VM",
+        "on-click": "/usr/bin/virt-manager"
+    },
+
+    "network": {
+        "format": "{ifname}",
+        "format-wifi": "{icon}",
+        "format-icons": [
+                "󰤯",
+                "󰤟",
+                "󰤢",
+                "󰤥",
+                "󰤨"
+        ],
+        "format-disconnected": "󰤮",
+        "format-ethernet": "󰈀",
+        "tooltip-format": "󰈀 {ifname} via {gwaddri}",
+        "tooltip-format-wifi": "󰤨 {ifname} @ {essid}\nIP: {ipaddr}\nStrength: {signalStrength}%\nFreq: {frequency}MHz\nUp: {bandwidthUpBits} Down: {bandwidthDownBits}",
+        "tooltip-format-ethernet": "󰈀 {ifname}\nIP: {ipaddr}\n up: {bandwidthUpBits} down: {bandwidthDownBits}",
+        "tooltip-format-disconnected": "Disconnected",
+        "interval": 1,
+        "max-length": 50
+    },
+
+    "tray": {
+        "icon-size": 21,
+        "spacing": 10
+    },
+
+    "custom/exit": {
+        "format": "",
+        "on-click": "/home/Josh/.config/rofi/powermenu/type-2/powermenu.sh",
+        "tooltip": false
+    }
+
+}
