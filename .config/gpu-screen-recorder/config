@@ -1,0 +1,30 @@
+main.record_area_option DP-1
+main.record_area_width 2560
+main.record_area_height 1440
+main.fps 60
+main.merge_audio_tracks false
+main.audio_input Monitor of Scarlett Solo USB Headphones / Line 1-2
+main.color_range full
+main.quality very_high
+main.codec auto
+main.audio_codec opus
+main.framerate_mode auto
+main.advanced_view true
+main.overclock false
+main.show_notifications false
+main.record_cursor true
+streaming.service twitch
+streaming.youtube.key 
+streaming.twitch.key 
+streaming.custom.url 
+streaming.custom.container flv
+streaming.start_recording_hotkey 0 0
+record.save_directory /home/Josh/Videos
+record.container mp4
+record.start_recording_hotkey 0 0
+record.pause_recording_hotkey 0 0
+replay.save_directory /home/Josh/Videos/Replays
+replay.container mp4
+replay.time 30
+replay.start_recording_hotkey 0 0
+replay.save_recording_hotkey 0 0

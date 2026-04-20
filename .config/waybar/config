@@ -1,0 +1,258 @@
+{
+    "layer": "top",
+    "position": "top",
+    "mode": "dock",
+    "height": 42,
+    "width": 2536,
+    "margin": "12 0 0 0",
+    "spacing": 2,
+    "reload_style_on_change": true,
+
+    "modules-left": [
+        "group/tools",
+        "custom/separator",
+        "hyprland/workspaces",
+        "custom/separator",
+        "cpu",
+        "custom/mem",
+        "custom/gpu",
+        "disk"
+    ],
+    "modules-center": [
+        "mpris",
+    ],
+    "modules-right": [
+        "hyprland/submap",
+        "wireplumber",
+        "network",
+        "custom/separator",
+        "clock"
+    ],
+
+    "hyprland/workspaces": {
+        "disable-scroll": true,
+        "all-outputs": false,
+        "on-scroll-up": "hyprctl dispatch workspace e+1",
+        "on-scroll-down": "hyprctl dispatch workspace e-1",
+        "format": "{icon}",
+        "format-icons": {
+            "active": "",
+            "default": ""
+        },
+        "sort-by-number": true
+    },
+
+    "hyprland/language": {
+        "format": "{} ",
+	"min-length": 5,
+	"tooltip": false
+    },
+
+    "keyboard-state": {
+        "numlock": false,
+        "capslock": true,
+        "format": "{name} {icon}",
+        "format-icons": {
+            "locked": " ",
+            "unlocked": ""
+        }
+    },
+
+    "group/tools": {
+        "orientation": "inherit",
+        "drawer": {
+            "transition-duration": 500,
+            "children-class": "not-tools",
+            "transition-left-to-right": true
+        },
+        "orientation": "horizontal",
+        "modules": [
+            "custom/menu",
+            "custom/hyprland",
+            "custom/vm",
+            "tray"
+        ]
+    },
+
+    "custom/separator": {
+        "format": "<span rise='12000'>|</span>"
+    },
+
+    "custom/menu": {
+        "format": "<span rise='3250' size='large'></span>",
+        "tooltip": true,
+        "tooltip-format": "Menu"
+    },
+
+    "custom/hyprland": {
+        "format": "<span size='large'></span>",
+        "on-click": "kitty -e /home/Josh/.config/waybar/scripts/hyprupdate.sh",
+        "tooltip": true,
+        "tooltip-format": "Hyprland Updater"
+    },
+
+    "custom/vm": {
+        "format": "<span rise='-1000' size='large'></span>",
+        "tooltip": true,
+        "tooltip-format": "Windows VM",
+        "on-click": "/home/Josh/.config/hypr/Scripts/virtmachine.sh"
+    },
+
+    "hyprland/mode": {
+        "format": "<span style=\"italic\">{}</span>"
+    },
+
+    "hyprland/submap": {
+        "format": "{} submap"
+    },
+
+    "clock": {
+        "format": "<span rise='1000' size='large'></span> <span rise='1000'>{:%d %b  <span size='large'></span> %H %M}</span>",
+        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+        "timezone": ""
+    },
+
+    "custom/weather": {
+        "format": "{} {icon}",
+        "format-icons": [ ],
+        "tooltip": true,
+        "interval": 1800,
+        "exec": "$HOME/.config/waybar/scripts/wttr.py",
+        "return-type": "json"
+    },
+
+    "group/hardware": {
+        "orientation": "inherit",
+        "drawer": {
+            "transition-duration": 500,
+            "children-class": "not-hardware",
+            "transition-left-to-right": true
+        },
+        "modules": [
+            "custom/dash",
+            "cpu",
+            "custom/mem",
+            "custom/gpu",
+            "disk"
+        ]
+    },
+
+    "custom/dash": {
+            "format": "<span rise='-1000' size='large'></span>",
+            "tooltip": false,
+            "on-click": "kitty -e btop"
+        },
+
+        "cpu": {
+            "format": "<span size='large'></span> {usage}%",
+            "interval": 3,
+            "tooltip": true,
+            "tooltip-format": "CPU Utilization",
+            "on-click": "kitty -e btop"
+        },
+
+        "custom/mem": {
+            "format": "<span rise='500' size='large'></span> {}",
+            "interval": 3,
+            "exec": "free --giga -h | awk '/Mem:/{printf $3}'",
+            "tooltip": true,
+            "tooltip-format": "Memory Utilization",
+            "on-click": "kitty -e btop"
+        },
+
+        "custom/gpu": {
+            "format": "<span rise='-4000' font='28px'>󰾲</span><span rise='-2500'> {}%</span>",
+            "interval": 3,
+            "exec": "printf \"%.0f\n\" $(echo \"$(cat /sys/module/amdgpu/drivers/pci:amdgpu/0000:03:00.0/mem_info_vram_used) / $(cat /sys/module/amdgpu/drivers/pci:amdgpu/0000:03:00.0/mem_info_vram_total) * 100\" | bc -l)",
+            "tooltip": true,
+            "tooltip-format": "GPU Utilization",
+            "on-click": "kitty -e btop"
+        },
+
+        "disk": {
+            "format": "<span rise='1000' size='large'></span> {percentage_used}%",
+            "interval": 30,
+            "tooltip": true,
+            "tooltip-format": "Disk Usage",
+            "on-click": "kitty -e btop"
+        },
+
+    "mpris": {
+	    "format": "{player_icon} {title}{ | artist}",
+		"max-length": 60,
+	    "player-icons": {
+	    	"default": "🎵",
+	    	"mpv": "",
+			"chromium": "",
+			"spotify": "",
+	    },
+	    "status-icons": {
+	    	"paused": "⏸"
+	    },
+    },
+
+    "group/sound": {
+        "orientation": "inherit",
+        "drawer": {
+            "transition-duration": 500,
+            "children-class": "not-hardware",
+            "transition-left-to-right": false
+        },
+        "modules": [
+            "wireplumber"
+        ]
+    },
+
+    "wireplumber": {
+        "format": "<span size='large'>{icon}</span> {volume}%",
+        "format-bluetooth": "{icon} {format_source} {volume}%",
+        "format-bluetooth-muted": " {icon} {format_source}",
+        "format-muted": "",
+        "format-source": " {volume}%",
+        "format-source-muted": "",
+        "on-click": "qpwgraph",
+        "format-icons": {
+            "headphone": "",
+            "hands-free": "",
+            "headset": "",
+            "mute": "󰝟",
+            "phone": "",
+            "portable": "",
+            "car": "",
+            "default": ["", "", ""]
+        }
+    },
+
+    "network": {
+        "format": "{ifname}",
+        "format-wifi": "{icon}",
+        "format-icons": [
+            "󰤯",
+            "󰤟",
+            "󰤢",
+            "󰤥",
+            "󰤨"
+        ],
+        "format-disconnected": "󰤮",
+        "format-ethernet": "<span size='large'></span>",
+        "tooltip-format": " {ifname} via {gwaddri}",
+        "tooltip-format-wifi": "󰤨 {ifname} @ {essid}\nIP: {ipaddr}\nStrength: {signalStrength}%\nFreq: {frequency}MHz\nUp: {bandwidthUpBits} Down: {bandwidthDownBits}",
+        "tooltip-format-ethernet": " {ifname}\nIP: {ipaddr}\n up: {bandwidthUpBits} down: {bandwidthDownBits}",
+        "tooltip-format-disconnected": "Disconnected",
+        "on-click": "nm-connection-editor",
+        "interval": 1,
+        "max-length": 50
+    },
+
+    "tray": {
+        "icon-size": 24,
+        "spacing": 10
+    },
+
+    "custom/exit": {
+        "format": "<span size='large'></span>",
+        "on-click": "/home/Josh/.config/rofi/powermenu/type-2/powermenu.sh",
+        "tooltip": false
+    }
+
+}

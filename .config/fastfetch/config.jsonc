@@ -1,0 +1,100 @@
+{
+  "$schema": "https://github.com/fastfetch-cli/fastfetch/raw/dev/doc/json_schema.json",
+  "logo": {
+    "source": "artix_small",
+  },
+  "display": {
+    "separator": " ",
+  },
+  "modules": [
+    // Title
+    {
+      "type": "title",
+      "format": "{host-name-colored}"
+    },
+    // OS
+    {
+      "type": "os",
+      "key": " ",
+      "format": "{#red}{2}",
+      "keyColor": "red",
+    },
+    // Kernel
+    {
+      "type": "command",
+      "key": " ",
+      "text": "uname -r | sed -e 's/-[0-9]-/ /g' -e 's/c/C/1' -e 's/os/OS/g'",
+      "format": "{#red}{1}",
+      "keyColor": "red",
+    },
+    // Uptime
+    {
+      "type": "uptime",
+      "key": " ",
+      "format": "{#green}{1}d {2}h {3}m",
+      "keyColor": "green",
+    },
+    // Packages
+    {
+      "type": "packages",
+      "key": " ",
+      "format": "{#green}{1}",
+      "keyColor": "green",
+    },
+    // Terminal
+    {
+      "type": "terminal",
+      "key": " ",
+      "format": "{#yellow}{1}",
+      "keyColor": "yellow",
+    },
+    // Shell
+    {
+      "type": "shell",
+      "key": " ",
+      "format": "{#yellow}{1}",
+      "keyColor": "yellow",
+    },
+    // Window Manager
+    {
+      "type": "wm",
+      "key": " ",
+      "format": "{#blue}{1} {version~0,6}",
+      "keyColor": "blue",
+    },
+    // CPU
+    {
+      "type": "cpu",
+      "key": " ",
+      "format": "{#blue}{} @ {freq-max}",
+      "keyColor": "blue",
+    },
+    // GPU
+    {
+      "type": "gpu",
+      "hideType": "integrated",
+      "key": "󰢮 ",
+      "format": "{#magenta}{name}", //"format": "     | {#magenta}{vendor} {name~8,19} | Version {driver~21,28}",
+      "keyColor": "magenta",
+    },
+    // Memory
+    {
+      "type": "memory",
+      "key": " ",
+      "format": "{#magenta}{} / {} ({#white}{}{#magenta})",
+      "keyColor": "magenta",
+      "percent": {
+      	"type": 3,
+	"green": 30,
+	"yellow": 70
+      }
+    },
+    {
+      "type": "break",
+    },
+    // Colors
+    {
+      "type": "colors",
+    },
+  ],
+}
